@@ -1,8 +1,33 @@
-<form (submit)="onSubmit()">
-    <label>Title</label>
-    <input type="text" [(ngModel)]="title" name="title" required />
-    <label>Content</label>
-    <textarea [(ngModel)]="content" name="content" required></textarea>
-    <button type="submit">Add Post</button>
-  </form>
-  
+<form (ngSubmit)="onSubmit()">
+  <div>
+    <label for="title">Title:</label>
+    <input
+      id="title"
+      type="text"
+      [(ngModel)]="title"
+      name="title"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="content">Content:</label>
+    <textarea
+      id="content"
+      [(ngModel)]="content"
+      name="content"
+      required
+    ></textarea>
+  </div>
+
+  <div>
+    <label for="category">Category:</label>
+    <select [(ngModel)]="category" name="category">
+      <option value="Tech">Tech</option>
+      <option value="Lifestyle">Lifestyle</option>
+      <option value="Education">Education</option>
+    </select>
+  </div>
+
+  <button type="submit">{{ postToEdit ? 'Update' : 'Add' }} Post</button>
+</form>

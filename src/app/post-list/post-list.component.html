@@ -1,6 +1,34 @@
-<div *ngFor="let post of posts" class="post">
-    <h2>{{ post.title }}</h2>
+<div>
+  <label for="search">Search Posts:</label>
+  <input
+    id="search"
+    type="text"
+    [(ngModel)]="searchTerm"
+    placeholder="Search by title or content"
+  />
+</div>
+
+<div *ngFor="let post of filteredPosts()">
+  <div class="post">
+    <h3>{{ post.title }}</h3>
     <p>{{ post.content }}</p>
+    <p><strong>Category:</strong> {{ post.category || 'None' }}</p>
+    <p><strong>Date:</strong> {{ post.date | date: 'short' }}</p>
+    <button (click)="editPost(post)">Edit</button>
     <button (click)="deletePost(post.id)">Delete</button>
+
+    <!-- Comments Section -->
+    <div>
+      <h4>Comments</h4>
+      <div *ngFor="let comment of post.comments">
+        <p>{{ comment }}</p>
+      </div>
+      <input
+        type="text"
+        [(ngModel)]="newComment[post.id]"
+        placeholder="Add a comment"
+      />
+      <button (click)="addComment(post.id)">Add Comment</button>
+    </div>
   </div>
-  
+</div>
